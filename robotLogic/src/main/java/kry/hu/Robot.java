@@ -1,5 +1,10 @@
 package kry.hu;
 
+import kry.hu.dto.RobotParametersDto;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 /*
 kotelezo fuggoseg: labEgyseg
 opcionalis fuggoseg: kar
@@ -9,17 +14,14 @@ fuggoseg:
 - setteren kesztul
 - privat adattagba
  */
+@RequiredArgsConstructor
+@ToString
 public class Robot {
-	Lab lab;
-	Kar kar;
-
-	public void setKar(Kar kar) {
-		this.kar = kar;
-	}
-
-	public Robot(Lab lab) {
-		this.lab = lab;
-	}
+	private final Lab lab;
+	@Setter
+	private Kar kar;
+	@Setter
+	private RobotParametersDto parameters;
 
 	public void hello() {
 		System.out.println("hello");
