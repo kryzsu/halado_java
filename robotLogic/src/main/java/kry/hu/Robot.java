@@ -24,7 +24,6 @@ public class Robot {
 	private RobotParametersDto parameters;
 
 	public void hello() {
-		System.out.println("hello");
 		lab.move(0,0);
 		if (kar != null) {
 			kar.integet();

@@ -18,7 +18,7 @@ public class Main {
 		Lab lab = new LabEgyseg();
 		Robot robot = new Robot(lab);
 		robot.setParameters(robotParametersDto);
-		robot.mozog();
+		robot.hello();
 
 		System.out.println(robot);
 	}
