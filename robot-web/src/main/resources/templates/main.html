@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Main</title>
+</head>
+<body>
+
+Uvd a robot fo oldalon
+
+<span th:text="${robot}"></span>
+
+<form action="/waving" method="post">
+    <button type="submit">Waving</button>
+</form>
+
+<form action="/move" method="post">
+    <input type="number" name="x" value="10"/>
+    <input type="number" name="y" value="12"/>
+    <button type="submit" name="action" value="move">Move</button>
+</form>
+
+</body>
+</html>

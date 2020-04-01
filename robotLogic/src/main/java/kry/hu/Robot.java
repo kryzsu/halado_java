@@ -35,6 +35,10 @@ public class Robot {
 		lab.move(10, 10);
 	}
 
+	public void mozog(int x, int y) {
+		lab.move(x, y);
+	}
+
 	public int comp() {
 		return lab.comp();
 	}

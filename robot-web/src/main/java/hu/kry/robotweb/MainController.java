@@ -5,14 +5,19 @@ import javax.annotation.PostConstruct;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import kry.hu.KarEgyseg;
 import kry.hu.Lab;
 import kry.hu.LabEgyseg;
 import kry.hu.Robot;
+import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
+@Slf4j
 public class MainController {
 	private Robot robot;
 
@@ -24,23 +29,45 @@ public class MainController {
 	}
 
 	@GetMapping(value = "/")
-	@ResponseBody
-	public String getRoot() {
-		return "OK";
+	public ModelAndView getRoot() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("main");
+		mav.addObject("robot", robot);
+		return mav;
 	}
 
 	@PostMapping(value = "/waving")
-	@ResponseBody
-	public String postWaving() {
+	public ModelAndView postWaving() {
+		// modell hasznalata
 		robot.hello();
-		return robot.toString();
+
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("main");
+		mav.addObject("robot", robot);
+		return mav;
 	}
 
 	@PostMapping(value = "/moveEnd")
-	@ResponseBody
-	public String postMoveEnd() {
+	public ModelAndView postMoveEnd() {
+		// modell hasznalata
 		robot.mozog();
-		return robot.toString();
+
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("main");
+		mav.addObject("robot", robot);
+		return mav;
+	}
+
+	@PostMapping(value = "/move")
+	public ModelAndView postMove( @RequestParam int x, @RequestParam int y) {
+		log.info(String.format("x:%d, y: %d", x, y));
+		// modell hasznalata
+		robot.mozog(x, y);
+
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("main");
+		mav.addObject("robot", robot);
+		return mav;
 	}
 
 }
