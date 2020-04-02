@@ -1,38 +1,41 @@
 package hu.kry.robotweb;
 
-import javax.annotation.PostConstruct;
+import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import kry.hu.KarEgyseg;
-import kry.hu.Lab;
-import kry.hu.LabEgyseg;
+import hu.kry.robotweb.dto.MoveDto;
+import hu.kry.robotweb.service.HelperService;
 import kry.hu.Robot;
-import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
 public class MainController {
+	private HelperService helperService;
 	private Robot robot;
 
-	@PostConstruct
-	private void init() {
-		Lab lab = new LabEgyseg();
-		robot = new Robot(lab);
-		robot.setKar( new KarEgyseg());
+	@Autowired
+	public void setHelperService(HelperService helperService) {
+		this.helperService = helperService;
+	}
+	@Autowired
+	public void setRobot(Robot robot) {
+		this.robot = robot;
 	}
 
 	@GetMapping(value = "/")
 	public ModelAndView getRoot() {
+
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("main");
 		mav.addObject("robot", robot);
+		mav.addObject("entitasok", helperService.getEntities());
 		return mav;
 	}
 
@@ -47,26 +50,26 @@ public class MainController {
 		return mav;
 	}
 
-	@PostMapping(value = "/moveEnd")
-	public ModelAndView postMoveEnd() {
-		// modell hasznalata
-		robot.mozog();
-
+	@GetMapping(value = "/move")
+	public ModelAndView getMove() {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("main");
-		mav.addObject("robot", robot);
+		mav.setViewName("move");
+		mav.addObject("moveDto", new MoveDto(10, 5));
 		return mav;
 	}
 
 	@PostMapping(value = "/move")
-	public ModelAndView postMove( @RequestParam int x, @RequestParam int y) {
-		log.info(String.format("x:%d, y: %d", x, y));
-		// modell hasznalata
-		robot.mozog(x, y);
-
+	public ModelAndView postMove(@Valid MoveDto moveDto, BindingResult bindingResult) {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("main");
-		mav.addObject("robot", robot);
+
+		if (bindingResult.hasErrors()) {
+			mav.setViewName("move");
+			mav.addObject("moveDto", moveDto);
+			return mav;
+		}
+		robot.mozog(moveDto.getX(), moveDto.getY());
+
+		mav.setViewName("redirect:/");
 		return mav;
 	}
 

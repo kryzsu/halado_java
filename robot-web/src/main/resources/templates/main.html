@@ -8,17 +8,11 @@
 
 Uvd a robot fo oldalon
 
-<span th:text="${robot}"></span>
+Robot allapota
+<span th:text="${robot}">span</span>
 
-<form action="/waving" method="post">
-    <button type="submit">Waving</button>
-</form>
-
-<form action="/move" method="post">
-    <input type="number" name="x" value="10"/>
-    <input type="number" name="y" value="12"/>
-    <button type="submit" name="action" value="move">Move</button>
-</form>
+Fomenu<br>
+<a href="/move">Robot mozgatas</a>
 
 </body>
 </html>

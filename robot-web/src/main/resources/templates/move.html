@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>move</title>
+    <style>
+        .fieldError {
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+
+<form action="/move" method="post" th:object="${moveDto}">
+    <input type="number" th:field="*{x}" th:class="${#fields.hasErrors('x')} ? fieldError"/>
+    <ul>
+        <li th:each="err : ${#fields.errors('x')}" th:text="${err}" />
+    </ul>
+
+    <input type="number" th:field="*{y}" th:class="${#fields.hasErrors('y')} ? fieldError"/>
+    <ul>
+        <li th:each="err : ${#fields.errors('y')}" th:text="${err}" />
+    </ul>
+
+    <button type="submit" name="action" value="move">Move</button>
+</form>
+
+</body>
+</html>
