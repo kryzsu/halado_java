@@ -1,4 +1,4 @@
-package hu.kry.robotweb;
+package hu.kry.robotweb.controller;
 
 import javax.validation.Valid;
 
@@ -9,33 +9,32 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import hu.kry.robotweb.dto.MoveDto;
-import hu.kry.robotweb.service.HelperService;
+import hu.kry.robotweb.controller.dto.MoveDto;
+import hu.kry.robotweb.service.EntityService;
 import kry.hu.Robot;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
 public class MainController {
-	private HelperService helperService;
 	private Robot robot;
+	private EntityService entityService;
 
-	@Autowired
-	public void setHelperService(HelperService helperService) {
-		this.helperService = helperService;
-	}
 	@Autowired
 	public void setRobot(Robot robot) {
 		this.robot = robot;
 	}
+	@Autowired
+	public void setEntityService(EntityService entityService) {
+		this.entityService = entityService;
+	}
 
 	@GetMapping(value = "/")
 	public ModelAndView getRoot() {
-
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("main");
 		mav.addObject("robot", robot);
-		mav.addObject("entitasok", helperService.getEntities());
+		mav.addObject("entities", entityService.listAll());
 		return mav;
 	}
 

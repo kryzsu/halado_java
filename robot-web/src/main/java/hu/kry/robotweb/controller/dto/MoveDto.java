@@ -1,4 +1,4 @@
-package hu.kry.robotweb.dto;
+package hu.kry.robotweb.controller.dto;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;

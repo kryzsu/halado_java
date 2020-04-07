@@ -9,10 +9,15 @@
 Uvd a robot fo oldalon
 
 Robot allapota
-<span th:text="${robot}">span</span>
+<span th:text="${robot}">span</span><br/>
+Entitasok
+<ol>
+    <li th:each="entity: ${entities}" ><span th:text="${entity}"></span></li>
+</ol>
 
 Fomenu<br>
-<a href="/move">Robot mozgatas</a>
+<a href="/move">Robot mozgatas</a><br/>
+<a href="/entity">Entitas felvetele</a>
 
 </body>
 </html>

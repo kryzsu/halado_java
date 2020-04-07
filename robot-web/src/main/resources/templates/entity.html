@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>move</title>
+    <title>Entity</title>
     <style>
         .fieldError {
             background-color: red;
@@ -10,20 +10,28 @@
     </style>
 </head>
 <body>
+entity
+<form action="/entity" method="post" th:object="${entityDto}">
 
-<form action="/move" method="post" th:object="${moveDto}">
+    Name
+    <input type="text" th:field="*{name}" th:class="${#fields.hasErrors('name')} ? fieldError"/>
+    <ul>
+        <li th:each="err : ${#fields.errors('name')}" th:text="${err}" />
+    </ul>
+    X
     <input type="number" th:field="*{x}" th:class="${#fields.hasErrors('x')} ? fieldError"/>
     <ul>
         <li th:each="err : ${#fields.errors('x')}" th:text="${err}" />
     </ul>
-
+    Y
     <input type="number" th:field="*{y}" th:class="${#fields.hasErrors('y')} ? fieldError"/>
     <ul>
         <li th:each="err : ${#fields.errors('y')}" th:text="${err}" />
     </ul>
 
-    <button type="submit" name="action" value="move">Move</button>
+    <button type="submit" name="action" value="move">Add</button>
 </form>
+<span th:text="${entityDto}"></span>
 <a href="/">Vissza a fooldalra</a>
 </body>
 </html>
