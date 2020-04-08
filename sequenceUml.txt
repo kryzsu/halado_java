@@ -1,0 +1,26 @@
+@startuml
+autonumber
+
+Title http communication
+
+actor user
+
+user -> Browser: click on link /
+Browser -> robotWeb : GET /
+robotWeb --> Browser : html response 200 (robot state, menu)
+...
+user -> Browser: click on link /move
+Browser -> robotWeb : GET /move
+robotWeb --> Browser : html response 200 (move form)
+
+
+Browser -> robotWeb : POST /move
+alt successful case
+robotWeb -> Robot: move(x,y)
+robotWeb --> Browser : html response 302 /
+else error in request
+robotWeb -> robotWeb: show bad value
+robotWeb -> robotWeb: indicate error fileds
+robotWeb --> Browser : html response 200 (move form)
+end
+@enduml
