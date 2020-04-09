@@ -10,8 +10,12 @@ import hu.kry.robotweb.repo.EntityRepository;
 
 @Component
 public class EntityServiceImpl implements EntityService {
-	@Autowired
 	private EntityRepository entityRepository;
+
+	@Autowired
+	public void setEntityRepository(EntityRepository entityRepository) {
+		this.entityRepository = entityRepository;
+	}
 
 	@Override
 	public void add(EntityDto entityDto) {

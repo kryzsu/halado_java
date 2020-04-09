@@ -14,8 +14,12 @@ import hu.kry.robotweb.service.EntityService;
 
 @Controller
 public class EntityController {
-	@Autowired
 	private EntityService entityService;
+
+	@Autowired
+	public void setEntityService(EntityService entityService) {
+		this.entityService = entityService;
+	}
 
 	@GetMapping("/entity")
 	ModelAndView showForm() {
