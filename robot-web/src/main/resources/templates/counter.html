@@ -9,6 +9,7 @@
     global counter <span th:text="${counterValue}"></span> <br/>
     local counter <span th:text="${localCounterValue}"></span> <br/>
     cookie counter <span th:text="${cookieCounter}"></span> <br/>
+    session counter <span th:text="${sessionCounter}"></span> <br/>
     <input type="hidden" name="localCounterValue" th:value="${localCounterValue}">
     <button type="submit" name="action" value="+">+</button>
     <button type="submit" name="action" value="-">-</button>
