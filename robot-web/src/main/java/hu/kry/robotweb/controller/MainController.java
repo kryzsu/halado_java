@@ -3,6 +3,7 @@ package hu.kry.robotweb.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,8 +18,15 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @Slf4j
 public class MainController {
+	private String param;
 	private Robot robot;
 	private EntityService entityService;
+
+
+	@Value("${parameter}")
+	public void setParam(String param) {
+		this.param = param;
+	}
 
 	@Autowired
 	public void setRobot(Robot robot) {
