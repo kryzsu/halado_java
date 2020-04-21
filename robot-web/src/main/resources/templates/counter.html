@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Counter</title>
+</head>
+<body>
+<form action="/counter" method="post" >
+    global counter <span th:text="${counterValue}"></span> <br/>
+    local counter <span th:text="${localCounterValue}"></span> <br/>
+    cookie counter <span th:text="${cookieCounter}"></span> <br/>
+    <input type="hidden" name="localCounterValue" th:value="${localCounterValue}">
+    <button type="submit" name="action" value="+">+</button>
+    <button type="submit" name="action" value="-">-</button>
+    <button type="submit" name="action" value="0">0</button>
+</form>
+</body>
+</html>
